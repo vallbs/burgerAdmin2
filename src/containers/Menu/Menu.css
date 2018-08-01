@@ -1,0 +1,31 @@
+.Menu {
+    background-color: #f57c00;
+    /* border-bottom: 2px solid #dd2c00; */
+    height: 48px;
+    box-sizing: border-box;
+}
+
+.MenuContainer {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+}
+
+.MenuItem {
+    font-size: 1.2rem;
+    /* display: inline; */
+    list-style: none;
+    /* border: 1px solid yellow; */
+    padding: 0 20px;
+    line-height: 48px;
+}
+
+.MenuItem a{
+    text-decoration: none;
+    color: white;
+}
+
+.Active{
+    background-color: #e65100;
+    border-bottom: 4px solid #bf360c;
+}

@@ -1,8 +1,31 @@
 import React, {Component} from 'react';
+import  './Burgers.css';
 
 class Burgers extends Component {
 
-    store = {
+    render () {
+        const burgers = this.state.burgers.map(burger => {
+            return (
+                <li key={burger.id}>
+                    <div>
+                        <span>{burger.name}: </span>
+                        <span>{burger.price} грн</span>
+                    </div>
+                </li>
+            );
+        });
+
+        return (
+            <div className="Burgers">
+            {/* // <div> */}
+                <h1>Burgers</h1>
+                <button>новий бургер</button>
+                <ul>{burgers}</ul>
+            </div>
+        );
+    }
+
+    state = {
         burgers: [
             {
                 id: "b1",
@@ -43,27 +66,6 @@ class Burgers extends Component {
                 price: 106
             }
         ]
-    }
-
-    render () {
-        const burgers = this.store.burgers.map(burger => {
-            return (
-                <li key={burger.id}>
-                    <div>
-                        <span>{burger.name}: </span>
-                        <span>{burger.price} грн</span>
-                    </div>
-                </li>
-            );
-        });
-
-        return (
-            <div>
-                <h1>Burgers</h1>
-                <button>новий бургер</button>
-                <ul>{burgers}</ul>
-            </div>
-        );
     }
 }
 
