@@ -1,6 +1,31 @@
 import React, { Component } from 'react';
+import "./Ingredients.css";
 
 class Ingredients extends Component {
+
+    render () {
+        const ingredients = this.state.ingredients.map(ing => {
+            return (
+                <li 
+                    className="IngredientItem"
+                    key={ing.id}>
+                    <p className="IngredientItemName">{ing.name}</p>
+                    <p className="IngredientItemPrice">{ing.price} грн</p>
+                    {/* <button>Редагувати</button>
+                    <button>Видалити</button> */}
+                    <a className="IngredientButton"><i class="fas fa-edit"></i></a>
+                    <a className="IngredientButton"><i class="fas fa-trash-alt"></i></a>
+                </li>
+            );
+        });
+        return (
+            <div className="Ingredients">
+                {/* <h1>Ingredients</h1> */}
+                <button className="IngredientCreateButton">новий інгредієнт</button>
+                <ul className="IngredientsList">{ingredients}</ul>                    
+            </div>
+        );
+    }
 
     state = { ingredients: 
         [
@@ -22,26 +47,6 @@ class Ingredients extends Component {
             {id: "i16'", name: "соус медовий", price: 12},
             {id: "i17", name: "соус біф", price: 14}
         ]
-    }
-
-    render () {
-        const ingredients = this.state.ingredients.map(ing => {
-            return (
-                <li key={ing.id}>
-                    <span>{ing.name}: </span>
-                    <span>{ing.price} грн</span>
-                    <button>Редагувати</button>
-                    <button>Видалити</button>
-                </li>
-            );
-        });
-        return (
-            <div>
-                <h1>Ingredients</h1>
-                <button>новий інгредієнт</button>
-                <ul>{ingredients}</ul>                    
-            </div>
-        );
     }
 };
 

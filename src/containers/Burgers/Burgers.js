@@ -1,12 +1,21 @@
 import React, {Component} from 'react';
+
 import  './Burgers.css';
 
 class Burgers extends Component {
+
+    handleBurgerDetails = (burgerId) => {
+        // console.log("burgerId", burgerId);
+        // console.log("handleBurgerDetails", this.props.location.pathname+"/"+burgerId);
+        // <Redirect to={this.props.location.pathname+"/"+burgerId} />
+        this.props.history.push(this.props.location.pathname+"/"+burgerId);
+    }
 
     render () {
         const burgers = this.state.burgers.map(burger => {
             return (
                 <li 
+                    onClick={burgerId => this.handleBurgerDetails(burger.id)}
                     className="BurgerItem"
                     key={burger.id}>
                     <div >
@@ -32,7 +41,7 @@ class Burgers extends Component {
             <div className="Burgers">
             {/* // <div> */}
                 {/* <h1>Бургери</h1> */}
-                <button className="BurgerCreate">новий бургер</button>
+                <button className="BurgerCreateButton">новий бургер</button>
                 <ul className="BurgersList">{burgers}</ul>
             </div>
         );
