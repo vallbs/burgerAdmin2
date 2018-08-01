@@ -6,9 +6,22 @@ class Burgers extends Component {
     render () {
         const burgers = this.state.burgers.map(burger => {
             return (
-                <li key={burger.id}>
+                <li 
+                    className="BurgerItem"
+                    key={burger.id}>
+                    <div >
+                        <span className="BurgerItemName">{burger.name}</span>
+                        {/* <span>{burger.price} грн</span> */}
+                    </div>
                     <div>
-                        <span>{burger.name}: </span>
+                        <p className="BurgerItemIngredients">
+                            {burger.ingredients.reduce((accum, curValue, index, array) => {
+                                let endChar = (index === array.length-1) ? "" : ", ";
+                                return accum + curValue.name + endChar;
+                            }, "")}
+                        </p>
+                    </div>
+                    <div className="BurgerItemPrice">
                         <span>{burger.price} грн</span>
                     </div>
                 </li>
@@ -18,9 +31,9 @@ class Burgers extends Component {
         return (
             <div className="Burgers">
             {/* // <div> */}
-                <h1>Burgers</h1>
-                <button>новий бургер</button>
-                <ul>{burgers}</ul>
+                {/* <h1>Бургери</h1> */}
+                <button className="BurgerCreate">новий бургер</button>
+                <ul className="BurgersList">{burgers}</ul>
             </div>
         );
     }

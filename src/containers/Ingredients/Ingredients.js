@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 class Ingredients extends Component {
 
-    store = { ingredients: 
+    state = { ingredients: 
         [
             {id: 'i1', name: "пшенична булочка", price: 20},
             {id: "i2", name: "житня булочка", price: 25},
@@ -25,7 +25,7 @@ class Ingredients extends Component {
     }
 
     render () {
-        const ingredients = this.store.ingredients.map(ing => {
+        const ingredients = this.state.ingredients.map(ing => {
             return (
                 <li key={ing.id}>
                     <span>{ing.name}: </span>

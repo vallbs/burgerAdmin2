@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
+import { Switch, Route, Redirect } from 'react-router-dom';
+
 import Menu from './containers/Menu/Menu';
 import Burgers from './containers/Burgers/Burgers';
 import Ingredients from './containers/Ingredients/Ingredients';
@@ -11,8 +13,13 @@ class App extends Component {
     return (
       <div>
         <Menu />
-        <Burgers />
-        <Ingredients />
+        <Switch>
+          <Route path="/burgers" component={Burgers}/>
+          <Route path="/ingredients" component={Ingredients}/>
+          <Route path="/" component={Burgers}/>
+        </Switch>
+        {/* <Burgers />
+        <Ingredients /> */}
       </div>
     );
   }
