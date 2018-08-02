@@ -8,10 +8,16 @@ class Ingredients extends Component {
         console.log("handleCreateIngredient");
     }
 
+    handleIngredientDetails = (ingredientId) => {
+        console.log("handleIngredientDetails");
+        this.props.history.push(this.props.history.location.pathname+"/"+ingredientId);
+    }
+
     render () {
         const ingredients = this.state.ingredients.map(ing => {
             return (
                 <li 
+                    onClick={ ingredientId => this.handleIngredientDetails(ing.id) }
                     className="IngredientItem"
                     key={ing.id}>
                     <p className="IngredientItemName">{ing.name}</p>
