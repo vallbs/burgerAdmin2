@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
 import "./Ingredients.css";
 
+import axios from "../../axios";
+
 class Ingredients extends Component {
+    handleCreateIngredient = () => {
+        console.log("handleCreateIngredient");
+    }
 
     render () {
         const ingredients = this.state.ingredients.map(ing => {
@@ -21,7 +26,11 @@ class Ingredients extends Component {
         return (
             <div className="Ingredients">
                 {/* <h1>Ingredients</h1> */}
-                <button className="IngredientCreateButton">новий інгредієнт</button>
+                <button 
+                    className="IngredientCreateButton"
+                    onClick={this.handleCreateIngredient}
+                    >новий інгредієнт
+                </button>
                 <ul className="IngredientsList">{ingredients}</ul>                    
             </div>
         );

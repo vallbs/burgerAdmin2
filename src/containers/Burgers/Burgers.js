@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 
 import  './Burgers.css';
+import axios from '../../axios';
 
 class Burgers extends Component {
 
@@ -9,6 +10,25 @@ class Burgers extends Component {
         // console.log("handleBurgerDetails", this.props.location.pathname+"/"+burgerId);
         // <Redirect to={this.props.location.pathname+"/"+burgerId} />
         this.props.history.push(this.props.location.pathname+"/"+burgerId);
+    }
+
+    handleCreateBurger = () => {
+        console.log("handleCreateBurger");
+        const burger = {
+            id: "b3",
+            name: "Копчений індіанець",
+            ingredients: [
+                {id: "i2", name: "житня булочка", quantity: 1},
+                {id: "i4", name: "індича котлета", quantity: 1},
+                {id: "i9", name: "сир сулугуні", quantity: 2},
+                {id: "i10", name: "томат", quantity: 1},
+                {id: "i14", name: "карамелізована цибуля", quantity: 1},                    
+                {id: "i15", name: "соус барбекю", quantity: 1}
+            ],
+            price: 106
+        };
+        axios.post("/burgers.json", burger)
+            .then(response => console.log(response));
     }
 
     render () {
@@ -41,7 +61,11 @@ class Burgers extends Component {
             <div className="Burgers">
             {/* // <div> */}
                 {/* <h1>Бургери</h1> */}
-                <button className="BurgerCreateButton">новий бургер</button>
+                <button 
+                    className="BurgerCreateButton"
+                    onClick={this.handleCreateBurger}
+                    >новий бургер
+                </button>
                 <ul className="BurgersList">{burgers}</ul>
             </div>
         );
