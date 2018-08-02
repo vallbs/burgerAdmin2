@@ -8,6 +8,7 @@ import Menu from './containers/Menu/Menu';
 import Burgers from './containers/Burgers/Burgers';
 import BurgerDetails from './containers/Burger/BurgerDetails';
 import Ingredients from './containers/Ingredients/Ingredients';
+import IngredientDetails from './containers/Ingredient/IngredientDetails';
 
 class App extends Component {
   render() {
@@ -16,7 +17,8 @@ class App extends Component {
         <Menu />
         <Switch>
           <Route path="/burgers/:id" exact component={BurgerDetails}/>
-          <Route path="/burgers" component={Burgers}/>          
+          <Route path="/burgers" component={Burgers}/>
+          <Route path="/ingredients/:id" component={IngredientDetails}/>         
           <Route path="/ingredients" component={Ingredients}/>
           <Route path="/" component={Burgers}/>
         </Switch>

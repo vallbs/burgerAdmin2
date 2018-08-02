@@ -18,8 +18,8 @@ class Ingredients extends Component {
                     <p className="IngredientItemPrice">{ing.price} грн</p>
                     {/* <button>Редагувати</button>
                     <button>Видалити</button> */}
-                    <a className="IngredientButton"><i class="fas fa-edit"></i></a>
-                    <a className="IngredientButton"><i class="fas fa-trash-alt"></i></a>
+                    {/* <a className="IngredientButton"><i class="fas fa-edit"></i></a>
+                    <a className="IngredientButton"><i class="fas fa-trash-alt"></i></a> */}
                 </li>
             );
         });

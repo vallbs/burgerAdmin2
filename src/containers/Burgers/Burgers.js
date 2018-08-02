@@ -14,21 +14,6 @@ class Burgers extends Component {
 
     handleCreateBurger = () => {
         console.log("handleCreateBurger");
-        const burger = {
-            id: "b3",
-            name: "Копчений індіанець",
-            ingredients: [
-                {id: "i2", name: "житня булочка", quantity: 1},
-                {id: "i4", name: "індича котлета", quantity: 1},
-                {id: "i9", name: "сир сулугуні", quantity: 2},
-                {id: "i10", name: "томат", quantity: 1},
-                {id: "i14", name: "карамелізована цибуля", quantity: 1},                    
-                {id: "i15", name: "соус барбекю", quantity: 1}
-            ],
-            price: 106
-        };
-        axios.post("/burgers.json", burger)
-            .then(response => console.log(response));
     }
 
     render () {
