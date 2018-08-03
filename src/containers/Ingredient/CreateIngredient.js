@@ -15,16 +15,12 @@ class CreateIngredient extends Component {
             price: this.state.ingredientPrice
         }
 
-        // axios.post("/ingredients.json", ingredient)
-        //     .then(response => {
-        //         console.log(response);
-        //         this.props.history.goBack();
-        //     })
-        //     .catch(error => console.log(error));
-        axios.get("/ingredients/-LItuAvKa42Bmw9HfU4-.json")
+        axios.post("/ingredients.json", ingredient)
             .then(response => {
                 console.log(response);
-            });
+                this.props.history.goBack();
+            })
+            .catch(error => console.log(error));
     }
 
     handleCancelChanges = (evt) => {
@@ -72,7 +68,7 @@ class CreateIngredient extends Component {
                             <label>Ціна: </label>
                             <input
                                 onChange={ evt => this.handlePriceChange(evt) } 
-                                type="text" 
+                                type="number" 
                                 name="price"/>
                         </p>
                     </div>

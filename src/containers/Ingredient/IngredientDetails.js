@@ -40,9 +40,23 @@ class IngredientDetails extends Component {
 
     handleSaveIngredient = (evt) => {
         evt.preventDefault();
-        console.log(evt);
         console.log("IngredientDetails.handleSaveIngredient");
+        axios.put("/ingredients/" + this.state.ingredient.id + ".json", this.state.ingredient)
+            .then(response => {
+                //console.log(response);
+                this.props.history.goBack();
+            })
+            .catch(error => console.log(error));
+    }
 
+    handleDeleteIngredient = (evt) => {
+        evt.preventDefault();
+        console.log(this.state);
+        axios.delete("/ingredients/" + this.state.ingredient.id + ".json")
+            .then(response => {
+                this.props.history.goBack();
+            })
+            .catch(error => console.log(error));
     }
 
     handleCancelChanges = (evt) => {
@@ -51,6 +65,24 @@ class IngredientDetails extends Component {
         console.log(this.props);
         console.log(evt);
         this.props.history.goBack();
+    }
+
+    handleNameChanges = (evt) => {
+        const ingredient = {
+                ...this.state.ingredient,
+                name: evt.target.value
+            }
+        console.log(ingredient);
+        this.setState({ ingredient });
+    }
+
+    handlePriceChanges = (evt) => {
+        const ingredient = {
+                ...this.state.ingredient,
+                price: evt.target.value
+            }
+        console.log(ingredient);
+        this.setState({ ingredient });
     }
 
     render() {
@@ -66,8 +98,20 @@ class IngredientDetails extends Component {
                 </div>
             );
 
-            ingredientNameInput = <input type="text" name="name" value={this.state.ingredient.name}/>
-            ingredientPriceInput = <input type="text" name="price" value={this.state.ingredient.price}/>
+            ingredientNameInput = (
+                <input 
+                    onChange={ evt => this.handleNameChanges(evt) }
+                    type="text" 
+                    name="name" 
+                    value={this.state.ingredient.name}/>
+            );
+            ingredientPriceInput = (
+                <input 
+                    onChange={ evt => this.handlePriceChanges(evt) }
+                    type="number" 
+                    name="price" 
+                    value={this.state.ingredient.price}/>
+            );
         }
         return(
             <div>
@@ -90,6 +134,11 @@ class IngredientDetails extends Component {
                         className="IngredientButton IngredientButtonSave"
                         type="submit" 
                         value="зберегти" />
+                    <button
+                        className="IngredientButton IngredientButtonCancel"
+                        onClick={ evt => this.handleDeleteIngredient(evt) }
+                        >видалити
+                    </button>
                     <button
                         className="IngredientButton IngredientButtonCancel"
                         onClick={ evt => this.handleCancelChanges(evt) }
