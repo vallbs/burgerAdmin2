@@ -19,8 +19,36 @@ class CreateBurger extends Component {
             .catch(error => console.log(error));
     }
 
-    handleCreateBurger = evt => {
+    handleNameChanges = (evt) => {
+        this.setState({ burgerName: evt.target.value });
+    }
+
+    handleSaveBurger = evt => {
         evt.preventDefault();
+        let ingredients = this.state.ingredients.filter(ing => {
+            return ing.quantity > 0; 
+        });
+
+        //deleting ingredient price
+        ingredients = ingredients.map(ing => {
+            return {
+                id: ing.id,
+                name: ing.name,
+                quantity: ing.quantity
+            }
+        });
+
+        const burger = {
+            ingredients,
+            name: this.state.burgerName,
+            price: this.state.burgerPrice
+        }
+        
+        axios.post("/burgers.json", burger)
+            .then(response => {
+                this.props.history.goBack();
+            })
+            .catch(error => console.log(error));
     }
 
     handleCancelChanges = evt => {
@@ -28,12 +56,40 @@ class CreateBurger extends Component {
         this.props.history.goBack();
     }
 
-    handleAddIngredient = ingredientId => {
+    handleAddIngredient = (evt, ingredientId, ingredientPrice) => {
+        evt.preventDefault();
+        const ingredients = this.state.ingredients.map(ing => {
+            if(ing.id === ingredientId) {
+                return { 
+                    ...ing, 
+                    quantity: ing.quantity+1
+                }
+            }
+            return ing;
+        });
 
+        this.setState({ 
+            ingredients,
+            burgerPrice: this.state.burgerPrice + 1*ingredientPrice
+        });
+        console.log("handleAddIngredient");
     }
 
-    handleRemoveIngredient = ingredientId => {
-        
+    handleRemoveIngredient = (evt, ingredientId, ingredientPrice) => {
+        evt.preventDefault();
+        const ingredients = this.state.ingredients.map(ing => {
+            if(ing.id === ingredientId) {
+                return { 
+                    ...ing, 
+                    quantity: ing.quantity-1
+                }
+            }
+            return ing;
+        });
+        this.setState({ 
+            ingredients,
+            burgerPrice: this.state.burgerPrice - 1*ingredientPrice
+        });
     }
 
     render() {
@@ -46,12 +102,13 @@ class CreateBurger extends Component {
                         key={ingredient.id}>
                         <button 
                             className="BurgerButton BurgerButtonAdd"
-                            onClick={ ingredientId => this.handleAddIngredient(ingredientId)}
+                            onClick={ (evt, ingredientId, ingredientPrice) => this.handleAddIngredient(evt, ingredient.id, ingredient.price)}
                             >+</button>
                         <span className="IngredientQuantity">{ingredient.quantity}</span>
                         <button
                             className="BurgerButton BurgerButtonRemove" 
-                            onClick={ ingredientId => this.handleRemoveIngredient(ingredientId)}
+                            onClick={ (evt, ingredientId, ingredientPrice) => this.handleRemoveIngredient(evt, ingredient.id, ingredient.price)}
+                            disabled={ingredient.quantity === 0}
                             >-</button>
                         <span className="IngredientName">{ingredient.name}, </span>
                         <span className="IngredientPrice">{ingredient.price} грн</span>
@@ -62,17 +119,17 @@ class CreateBurger extends Component {
 
         return (
             <div className="CreateBurger">
-                <form onSubmit={ evt => this.handleCreateBurger(evt) }>
+                <form onSubmit={ evt => this.handleSaveBurger(evt) }>
                     <div className="">
                         <p>
                             <label>Назва: </label>
                             <input 
-                                onChange={ evt => this.handleNameChange(evt) }
+                                onChange={ evt => this.handleNameChanges(evt) }
                                 type="text" 
                                 name="name"/>
                         </p>
                         <p>
-                            <span>Ціна: {this.state.burger && this.state.burger.price}</span>
+                            <span>Ціна: {this.state.burgerPrice}</span>
                         </p>
 
                         <input 
@@ -98,7 +155,8 @@ class CreateBurger extends Component {
     }
 
     state = {
-        burger: null,
+        burgerName: null,
+        burgerPrice: 0,
         ingredients: null,
         saving: false
     }
