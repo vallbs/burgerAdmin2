@@ -8,11 +8,14 @@ class Ingredients extends Component {
         axios.get("/ingredients.json")
             .then(response => {
                 const data = response.data;
-                const ingredients = Object.keys(data).map(key => {
+                let ingredients = Object.keys(data).map(key => {
                     return {
                         ...data[key],
                         id: key
                     };
+                });
+                ingredients = ingredients.sort( (a,b) => {
+                    return a.name !== b.name ? a.name < b.name ? -1 : 1 : 0;
                 });
                 this.setState({ingredients});
             })

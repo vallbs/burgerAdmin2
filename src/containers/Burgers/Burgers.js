@@ -8,7 +8,6 @@ class Burgers extends Component {
         let burgers = null;
         axios.get("/burgers.json")
             .then(response => {
-                console.log(response);
                 const data = response.data;
                 burgers = Object.keys(data).map(key => {
                     return {

@@ -34,6 +34,10 @@ class BurgerDetails extends Component {
         //     .catch(error => console.log(error));
     }
 
+    handleEditBurger = (burgerId) => {
+        this.props.history.push(this.props.location.pathname + "/edit");
+    }
+
     render() {
         let burgerEl = <p>Loading</p>
         if(this.state.burger) {
@@ -41,6 +45,13 @@ class BurgerDetails extends Component {
                 <div
                     className="BurgerItem"
                     key={this.state.burger.id}>
+                    <div>
+                        <button 
+                            onClick={ (burgerId) => this.handleEditBurger(this.state.burger.id) } 
+                            >редагувати
+                        </button>
+                        <button>видалити</button>
+                    </div>
                     <div >
                         <span className="BurgerItemName">{this.state.burger.name}</span>
                     </div>

@@ -10,6 +10,27 @@
     margin: 20px;
 }
 
+.BurgerIngredientItem_new {
+    display: inline-block;
+    /* justify-content: center; */
+    align-items: center;
+    margin: 10px;
+    border: 1px solid black;
+    padding:  0;
+}
+
+.BurgerIngredientItem--srting{
+    display: inline-block;
+    margin: 0 10px;
+}
+
+.BurgerIngredientItem--Add{
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    /* background: #ff8f00; */
+}
+
 .IngredientName {
     /* border: 1px solid black; */
     text-transform: uppercase;
@@ -19,8 +40,11 @@
 }
 
 .IngredientPrice {
-    font-size: 0.8rem;
-    font-style: italic;
+    font-size: 1rem;
+    font-style: normal;
+    /* border: 1px solid black; */
+    margin-left: 10px;
+    padding: 0px;
 }
 
 .IngredientQuantity {

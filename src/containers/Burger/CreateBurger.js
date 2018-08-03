@@ -7,12 +7,15 @@ class CreateBurger extends Component {
         axios.get("/ingredients.json")
             .then(response => {
                 const data = response.data;
-                const ingredients = Object.keys(data).map(key => {
+                let ingredients = Object.keys(data).map(key => {
                     return {
                         ...data[key],
                         id: key,
                         quantity: 0
                     }
+                });
+                ingredients = ingredients.sort( (a,b) => {
+                    return a.name !== b.name ? a.name < b.name ? -1 : 1 : 0;
                 });
                 this.setState({ ingredients });
             })
@@ -98,9 +101,24 @@ class CreateBurger extends Component {
             ingredients = this.state.ingredients.map(ingredient => {
                 return (
                     <div 
-                        className="BurgerIngredientItem"
+                        className="BurgerIngredientItem_new"
                         key={ingredient.id}>
                         <button 
+                            className="BurgerIngredientItem--Add"
+                            onClick={ (evt, ingredientId, ingredientPrice) => this.handleAddIngredient(evt, ingredient.id, ingredient.price)}
+                            >+</button>
+                        <div className="BurgerIngredientItem--srting">
+                            <span className="">{ingredient.name}, </span>
+                            <span className="">{ingredient.price} грн </span>
+                            <span className="">({ingredient.quantity})</span>
+                        </div>
+                        
+                        <button
+                            className="BurgerIngredientItem--Add" 
+                            onClick={ (evt, ingredientId, ingredientPrice) => this.handleRemoveIngredient(evt, ingredient.id, ingredient.price)}
+                            disabled={ingredient.quantity === 0}
+                            >-</button>
+                        {/* <button 
                             className="BurgerButton BurgerButtonAdd"
                             onClick={ (evt, ingredientId, ingredientPrice) => this.handleAddIngredient(evt, ingredient.id, ingredient.price)}
                             >+</button>
@@ -110,8 +128,8 @@ class CreateBurger extends Component {
                             onClick={ (evt, ingredientId, ingredientPrice) => this.handleRemoveIngredient(evt, ingredient.id, ingredient.price)}
                             disabled={ingredient.quantity === 0}
                             >-</button>
-                        <span className="IngredientName">{ingredient.name}, </span>
-                        <span className="IngredientPrice">{ingredient.price} грн</span>
+                        <span className="IngredientName">{ingredient.name}</span>
+                        <span className="IngredientPrice">{ingredient.price} грн</span> */}
                     </div>
                 );        
             });
