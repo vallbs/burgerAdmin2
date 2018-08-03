@@ -8,19 +8,30 @@ class BurgerDetails extends Component {
     }
     componentDidMount() {
         this.setState({ loading: true });
-        axios.get("/burgers.json")
-            .then(response => {
-                const burgerId = this.props.match.params.id;
+        const burgerId = this.props.match.params.id;
+        axios.get("/burgers/" + burgerId + ".json")
+            .then(response => {           
                 const data = response.data;
-                const burgers = Object.keys(data).map(key => {
-                    return data[key];
-                });
-                const burger = burgers.filter(bur => {
-                    return bur.id === burgerId;
-                });
-                this.setState({ burger: burger[0], loading: false });
+                const burger = {
+                    ...data,
+                    id: burgerId
+                }
+                this.setState({ burger, loading: false });
             })
             .catch(error => console.log(error));
+        // axios.get("/burgers.json")
+        //     .then(response => {
+        //         const burgerId = this.props.match.params.id;
+        //         const data = response.data;
+        //         const burgers = Object.keys(data).map(key => {
+        //             return data[key];
+        //         });
+        //         const burger = burgers.filter(bur => {
+        //             return bur.id === burgerId;
+        //         });
+        //         this.setState({ burger: burger[0], loading: false });
+        //     })
+        //     .catch(error => console.log(error));
     }
 
     render() {
