@@ -4,7 +4,6 @@ import axios from '../../axios';
 
 class IngredientDetails extends Component {
     componentDidMount() {
-        console.log("IngredientDetails.componentDidMount");
         let data = null;
         const ingredients = null;
         axios.get("/ingredients.json")
@@ -28,7 +27,6 @@ class IngredientDetails extends Component {
                     return ing.id === ingredientId;
                 });
                 ingredient = ingredient && ingredient[0];
-                //console.log(ingredient);
                 this.setState({
                     ingredient,
                     loading: false
@@ -40,10 +38,8 @@ class IngredientDetails extends Component {
 
     handleSaveIngredient = (evt) => {
         evt.preventDefault();
-        console.log("IngredientDetails.handleSaveIngredient");
         axios.put("/ingredients/" + this.state.ingredient.id + ".json", this.state.ingredient)
             .then(response => {
-                //console.log(response);
                 this.props.history.goBack();
             })
             .catch(error => console.log(error));
@@ -51,7 +47,6 @@ class IngredientDetails extends Component {
 
     handleDeleteIngredient = (evt) => {
         evt.preventDefault();
-        console.log(this.state);
         axios.delete("/ingredients/" + this.state.ingredient.id + ".json")
             .then(response => {
                 this.props.history.goBack();
@@ -61,9 +56,6 @@ class IngredientDetails extends Component {
 
     handleCancelChanges = (evt) => {
         evt.preventDefault();
-        console.log("IngredientDetails.handleCancelChanges");
-        console.log(this.props);
-        console.log(evt);
         this.props.history.goBack();
     }
 
@@ -72,7 +64,6 @@ class IngredientDetails extends Component {
                 ...this.state.ingredient,
                 name: evt.target.value
             }
-        console.log(ingredient);
         this.setState({ ingredient });
     }
 
@@ -81,13 +72,10 @@ class IngredientDetails extends Component {
                 ...this.state.ingredient,
                 price: evt.target.value
             }
-        console.log(ingredient);
         this.setState({ ingredient });
     }
 
     render() {
-        console.log("IngredientDetails.render");
-
         let ingredient = <p>loading...</p>;
         let ingredientNameInput = <span>loading...</span>;
         let ingredientPriceInput = <span>loading...</span>;

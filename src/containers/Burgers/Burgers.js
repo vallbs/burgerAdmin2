@@ -6,14 +6,13 @@ import axios from '../../axios';
 class Burgers extends Component {
 
     handleBurgerDetails = (burgerId) => {
-        // console.log("burgerId", burgerId);
-        // console.log("handleBurgerDetails", this.props.location.pathname+"/"+burgerId);
         // <Redirect to={this.props.location.pathname+"/"+burgerId} />
         this.props.history.push(this.props.location.pathname+"/"+burgerId);
     }
 
     handleCreateBurger = () => {
-        console.log("handleCreateBurger");
+        //console.log("handleCreateBurger");
+        this.props.history.push(this.props.history.location.pathname + "/create");
     }
 
     render () {

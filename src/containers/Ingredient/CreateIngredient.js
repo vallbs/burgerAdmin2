@@ -3,10 +3,6 @@ import './IngredientDetails.css';
 import axios from '../../axios';
 
 class CreateIngredient extends Component {
-    componentDidMount() {
-        console.log("CreateIngredient.componentDidMount");
-    }
-
     handleSaveIngredient = (evt) => {
         evt.preventDefault();
         const ingredient = {
@@ -17,7 +13,6 @@ class CreateIngredient extends Component {
 
         axios.post("/ingredients.json", ingredient)
             .then(response => {
-                console.log(response);
                 this.props.history.goBack();
             })
             .catch(error => console.log(error));
@@ -41,8 +36,6 @@ class CreateIngredient extends Component {
     }
 
     render() {
-        console.log("CreateIngredient.render");
-
         return(
             <div>
                 <form 
@@ -50,13 +43,13 @@ class CreateIngredient extends Component {
                     onSubmit={ evt => this.handleSaveIngredient(evt) }>
                     
                     <div className="IngredientDetailsData">
-                        <p>
+                        {/* <p>
                             <label>Id: </label>
                             <input 
                                 onChange={ evt => this.handleIdChange(evt) }
                                 type="text" 
                                 name="id"/>
-                        </p>
+                        </p> */}
                         <p>
                             <label>Назва: </label>
                             <input 

@@ -7,6 +7,7 @@ import { withRouter, Switch, Route, Redirect } from 'react-router-dom';
 import Menu from './containers/Menu/Menu';
 import Burgers from './containers/Burgers/Burgers';
 import BurgerDetails from './containers/Burger/BurgerDetails';
+import CreateBurger from './containers/Burger/CreateBurger';
 import Ingredients from './containers/Ingredients/Ingredients';
 import IngredientDetails from './containers/Ingredient/IngredientDetails';
 import CreateIngredient from './containers/Ingredient/CreateIngredient';
@@ -17,6 +18,7 @@ class App extends Component {
       <div>
         <Menu />
         <Switch>
+          <Route path="/burgers/create" exact component={CreateBurger}/>
           <Route path="/burgers/:id" exact component={BurgerDetails}/>
           <Route path="/burgers" component={Burgers}/>
           <Route path="/ingredients/new" component={CreateIngredient}/>

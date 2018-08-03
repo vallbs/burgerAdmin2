@@ -8,31 +8,27 @@ class Ingredients extends Component {
         axios.get("/ingredients.json")
             .then(response => {
                 const data = response.data;
-                //console.log(Object.keys(data))
                 const ingredients = Object.keys(data).map(key => {
                     return {
                         ...data[key],
                         id: key
                     };
                 });
-                console.log(ingredients);
                 this.setState({ingredients});
             })
             .catch(error => console.log(error));
     }
 
     handleCreateIngredient = () => {
-        console.log("handleCreateIngredient");
         this.props.history.push(this.props.history.location.pathname+"/new");
     }
 
     handleIngredientDetails = (ingredientId) => {
-        console.log("handleIngredientDetails");
         this.props.history.push(this.props.history.location.pathname+"/"+ingredientId);
     }
 
     render () {
-        let ingredients = <p>empty</p>
+        let ingredients = <p>loading...</p>
         if(this.state.ingredients) {
             ingredients = this.state.ingredients.map(ing => {
                 return (
